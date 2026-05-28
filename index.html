@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapid PC Repair Ltd — Southport's #1 Computer Repair Shop</title>
+<meta name="description" content="Building and repairing PCs, Laptops, Macbooks, iMacs and Gaming consoles since 2000. Based at 129 Manchester Rd, Southport. Call 01704-778708.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============== RESET & BASE ============== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --orange:#FF6D0B;
+  --orange-deep:#E55A00;
+  --black:#0A0A0A;
+  --ink:#1A1A1A;
+  --white:#FFFFFF;
+  --mute:#F4F4F4;
+  --grey:#7A7A7A;
+  --max:1280px;
+}
+html { scroll-behavior:smooth; }
+body{
+  font-family:'Inter', system-ui, -apple-system, sans-serif;
+  color:var(--black);
+  background:var(--white);
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; border:none; }
+
+/* ============== TYPOGRAPHY ============== */
+.display{ font-family:'Archivo Black', sans-serif; font-weight:900; letter-spacing:-0.02em; line-height:0.95; text-transform:uppercase; }
+.headline{ font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.02em; }
+.eyebrow{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange); }
+
+/* ============== NAV ============== */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(10,10,10,0.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,109,11,0.2);
+  transition:transform 0.4s ease;
+}
+.nav-inner{
+  max-width:var(--max); margin:0 auto;
+  padding:18px 32px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px;
+}
+.brand{ display:flex; align-items:center; gap:12px; color:#fff; }
+.brand-logo{
+  width:46px; height:46px; border-radius:10px;
+  background:#fff; padding:4px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 0 0 2px var(--orange);
+  transition:transform 0.3s ease;
+}
+.brand:hover .brand-logo{ transform:rotate(-8deg) scale(1.05); }
+.brand-logo img{ width:100%; height:100%; object-fit:contain; }
+.brand-text{ font-family:'Archivo Black', sans-serif; font-size:16px; text-transform:uppercase; letter-spacing:0.05em; line-height:1; }
+.brand-text span{ color:var(--orange); display:block; font-size:10px; letter-spacing:0.3em; margin-top:4px; }
+
+.nav-links{ display:flex; gap:32px; list-style:none; align-items:center; }
+.nav-links a{
+  color:#fff; font-weight:600; font-size:14px;
+  text-transform:uppercase; letter-spacing:0.05em;
+  position:relative; padding:6px 0;
+  transition:color 0.3s;
+}
+.nav-links a::after{
+  content:''; position:absolute; left:0; bottom:0;
+  width:0; height:2px; background:var(--orange);
+  transition:width 0.3s;
+}
+.nav-links a:hover{ color:var(--orange); }
+.nav-links a:hover::after{ width:100%; }
+
+.nav-cta{
+  background:var(--orange); color:#fff;
+  padding:12px 22px; border-radius:999px;
+  font-weight:700; font-size:14px;
+  text-transform:uppercase; letter-spacing:0.05em;
+  display:inline-flex; align-items:center; gap:8px;
+  transition:all 0.3s;
+  box-shadow:0 4px 20px rgba(255,109,11,0.4);
+}
+.nav-cta:hover{ background:#fff; color:var(--orange); transform:translateY(-2px); }
+
+.burger{ display:none; background:transparent; color:#fff; font-size:24px; }
+
+/* ============== HERO ============== */
+.hero{
+  min-height:100vh;
+  background:var(--black);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  padding:140px 32px 80px;
+  display:flex; align-items:center;
+}
+.hero::before{
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(255,109,11,0.25), transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(255,109,11,0.15), transparent 50%);
+  pointer-events:none;
+}
+.grid-bg{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,109,11,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,109,11,0.06) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+  animation:gridShift 30s linear infinite;
+}
+@keyframes gridShift{
+  from{ background-position:0 0, 0 0; }
+  to{ background-position:60px 60px, 60px 60px; }
+}
+.hero-inner{
+  max-width:var(--max); width:100%; margin:0 auto;
+  display:grid; grid-template-columns:1.2fr 1fr; gap:60px;
+  align-items:center; position:relative; z-index:2;
+}
+.hero-tag{
+  display:inline-flex; align-items:center; gap:10px;
+  background:rgba(255,109,11,0.1);
+  border:1px solid rgba(255,109,11,0.3);
+  padding:8px 16px; border-radius:999px;
+  font-size:13px; font-weight:600; color:var(--orange);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin-bottom:24px;
+}
+.dot{ width:8px; height:8px; border-radius:50%; background:var(--orange); animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:0.5; transform:scale(1.4);} }
+
+.hero h1{
+  font-size:clamp(48px, 8vw, 110px);
+  margin-bottom:24px;
+}
+.hero h1 .stroke{
+  -webkit-text-stroke:2px var(--orange);
+  color:transparent;
+  display:inline-block;
+}
+.hero h1 .accent{ color:var(--orange); }
+.hero-sub{
+  font-size:18px; max-width:520px;
+  color:rgba(255,255,255,0.75);
+  margin-bottom:36px;
+  line-height:1.6;
+}
+.hero-ctas{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:48px; }
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:18px 32px; border-radius:999px;
+  font-weight:700; font-size:15px;
+  text-transform:uppercase; letter-spacing:0.08em;
+  transition:all 0.3s;
+  position:relative; overflow:hidden;
+}
+.btn-primary{ background:var(--orange); color:#fff; }
+.btn-primary:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(255,109,11,0.5); }
+.btn-ghost{ background:transparent; color:#fff; border:2px solid rgba(255,255,255,0.2); }
+.btn-ghost:hover{ border-color:var(--orange); color:var(--orange); }
+.btn .arrow{ transition:transform 0.3s; }
+.btn:hover .arrow{ transform:translateX(4px); }
+
+.hero-stats{ display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; max-width:520px; }
+.stat .num{
+  font-family:'Archivo Black', sans-serif;
+  font-size:44px; color:var(--orange); line-height:1;
+  display:block; margin-bottom:6px;
+}
+.stat .lbl{ font-size:12px; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.6); font-weight:600; }
+
+/* hero visual */
+.hero-visual{
+  position:relative;
+  aspect-ratio:1/1.05;
+  display:flex; align-items:center; justify-content:center;
+}
+.hero-photo{
+  position:absolute; inset:0;
+  border-radius:24px; overflow:hidden;
+  background:#111;
+  transform:rotate(-3deg);
+  box-shadow:0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,109,11,0.3);
+  transition:transform 0.6s cubic-bezier(.2,.8,.2,1);
+}
+.hero-photo:hover{ transform:rotate(0deg) scale(1.02); }
+.hero-photo img{ width:100%; height:100%; object-fit:cover; opacity:0.9; }
+.hero-photo::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, transparent 40%, rgba(255,109,11,0.35) 100%);
+}
+.float-badge{
+  position:absolute;
+  background:var(--orange); color:#fff;
+  padding:16px 22px; border-radius:18px;
+  font-family:'Archivo Black', sans-serif; font-size:14px;
+  text-transform:uppercase; letter-spacing:0.05em;
+  box-shadow:0 10px 30px rgba(255,109,11,0.5);
+  z-index:3;
+  display:flex; align-items:center; gap:12px;
+}
+.float-badge .big{ font-size:28px; line-height:1; }
+.badge-1{ top:-20px; right:-20px; animation:float 4s ease-in-out infinite; }
+.badge-2{ bottom:-15px; left:-25px; background:#fff; color:var(--black); animation:float 4s ease-in-out infinite 2s; }
+.badge-2 .big{ color:var(--orange); }
+@keyframes float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+
+.marquee{
+  background:var(--orange); color:#000;
+  padding:18px 0; overflow:hidden;
+  border-top:2px solid #000; border-bottom:2px solid #000;
+}
+.marquee-track{
+  display:flex; gap:60px; white-space:nowrap;
+  animation:scroll 30s linear infinite;
+  font-family:'Archivo Black', sans-serif;
+  font-size:22px; text-transform:uppercase;
+  align-items:center;
+}
+.marquee-track span{ display:inline-flex; align-items:center; gap:60px; }
+.marquee-track .dot-sep{ width:10px; height:10px; background:#000; border-radius:50%; flex-shrink:0; }
+@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ============== SECTIONS ============== */
+section{ padding:120px 32px; position:relative; }
+.container{ max-width:var(--max); margin:0 auto; }
+.section-head{ text-align:center; margin-bottom:72px; }
+.section-head h2{
+  font-size:clamp(40px, 6vw, 80px);
+  margin:16px 0 18px;
+}
+.section-head p{ font-size:18px; color:var(--grey); max-width:600px; margin:0 auto; }
+
+/* ============== SERVICES ============== */
+.services{ background:var(--white); }
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:24px;
+}
+.service{
+  background:var(--white);
+  border:2px solid var(--black);
+  border-radius:24px;
+  padding:36px 32px;
+  position:relative;
+  cursor:pointer;
+  transition:all 0.4s cubic-bezier(.2,.8,.2,1);
+  overflow:hidden;
+}
+.service::before{
+  content:''; position:absolute; inset:0;
+  background:var(--black);
+  transform:translateY(100%);
+  transition:transform 0.5s cubic-bezier(.2,.8,.2,1);
+  z-index:0;
+}
+.service:hover{ transform:translateY(-8px); box-shadow:8px 8px 0 var(--orange); }
+.service:hover::before{ transform:translateY(0); }
+.service:hover .service-content{ color:#fff; }
+.service:hover .service-icon{ background:var(--orange); color:#fff; transform:rotate(-10deg) scale(1.1); }
+.service:hover .service-arrow{ background:var(--orange); color:#fff; transform:rotate(-45deg); }
+
+.service-content{ position:relative; z-index:2; transition:color 0.4s; }
+.service-icon{
+  width:72px; height:72px; border-radius:18px;
+  background:var(--mute); color:var(--black);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:24px; font-size:32px;
+  transition:all 0.4s;
+}
+.service h3{
+  font-family:'Archivo Black', sans-serif;
+  font-size:24px; text-transform:uppercase;
+  letter-spacing:-0.01em; margin-bottom:14px;
+  line-height:1.1;
+}
+.service p{ font-size:15px; line-height:1.6; opacity:0.85; margin-bottom:24px; }
+.service-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+.tag{
+  font-size:11px; font-weight:700;
+  padding:6px 12px; border-radius:999px;
+  background:var(--mute); color:var(--black);
+  text-transform:uppercase; letter-spacing:0.05em;
+  transition:all 0.3s;
+}
+.service:hover .tag{ background:rgba(255,255,255,0.12); color:#fff; }
+.service-arrow{
+  width:44px; height:44px; border-radius:50%;
+  background:var(--mute); color:var(--black);
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:18px; transition:all 0.4s;
+}
+
+/* ============== WHY US ============== */
+.why{
+  background:var(--black); color:#fff;
+  position:relative; overflow:hidden;
+}
+.why::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 80% 20%, rgba(255,109,11,0.18), transparent 50%);
+  pointer-events:none;
+}
+.why .container{ position:relative; z-index:1; }
+.why-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:80px;
+  align-items:center;
+}
+.why-text h2{ font-size:clamp(40px, 6vw, 72px); margin-bottom:24px; }
+.why-text h2 .accent{ color:var(--orange); }
+.why-text p{ font-size:17px; line-height:1.7; color:rgba(255,255,255,0.75); margin-bottom:24px; }
+
+.why-points{ display:grid; gap:20px; margin-top:32px; }
+.point{
+  display:flex; gap:18px; align-items:flex-start;
+  padding:20px; border-radius:16px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  transition:all 0.3s;
+}
+.point:hover{ background:rgba(255,109,11,0.1); border-color:var(--orange); transform:translateX(8px); }
+.point-num{
+  width:44px; height:44px; border-radius:12px;
+  background:var(--orange); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Archivo Black', sans-serif; font-size:18px;
+  flex-shrink:0;
+}
+.point h4{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:18px; margin-bottom:6px; }
+.point p{ font-size:14px; color:rgba(255,255,255,0.65); margin:0; }
+
+.why-visual{ position:relative; aspect-ratio:1/1.1; }
+.why-photo{
+  position:absolute; border-radius:20px; overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,0.5);
+  transition:transform 0.6s;
+}
+.why-photo img{ width:100%; height:100%; object-fit:cover; }
+.why-1{ top:0; left:0; width:65%; height:55%; z-index:2; }
+.why-2{ bottom:0; right:0; width:60%; height:55%; border:4px solid var(--orange); }
+.why-photo:hover{ transform:scale(1.04); }
+
+/* ============== COUNTERS ============== */
+.counters{
+  background:var(--orange); color:#000;
+  padding:80px 32px;
+  border-top:3px solid #000; border-bottom:3px solid #000;
+}
+.counter-grid{
+  max-width:var(--max); margin:0 auto;
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:32px;
+}
+.counter{ text-align:center; }
+.counter .n{
+  font-family:'Archivo Black', sans-serif;
+  font-size:clamp(54px, 8vw, 96px); line-height:1;
+  display:block; margin-bottom:8px;
+}
+.counter .l{
+  font-weight:700; text-transform:uppercase;
+  letter-spacing:0.1em; font-size:13px;
+}
+
+/* ============== TESTIMONIALS ============== */
+.testimonials{ background:var(--mute); }
+.testi-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.testi{
+  background:#fff; padding:36px;
+  border-radius:24px;
+  border:2px solid transparent;
+  transition:all 0.4s;
+  position:relative;
+}
+.testi:hover{ border-color:var(--orange); transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.08); }
+.stars{ color:var(--orange); font-size:18px; letter-spacing:2px; margin-bottom:18px; }
+.testi p{ font-size:16px; line-height:1.6; margin-bottom:24px; color:var(--ink); }
+.testi-author{ display:flex; align-items:center; gap:14px; }
+.avatar{
+  width:48px; height:48px; border-radius:50%;
+  background:var(--black); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Archivo Black',sans-serif; font-size:16px;
+}
+.testi-name{ font-weight:700; font-size:15px; }
+.testi-role{ font-size:13px; color:var(--grey); }
+.quote-mark{
+  position:absolute; top:20px; right:24px;
+  font-family:'Archivo Black', sans-serif;
+  font-size:80px; line-height:1; color:var(--orange);
+  opacity:0.15;
+}
+
+/* ============== CONTACT ============== */
+.contact{
+  background:var(--black); color:#fff;
+  position:relative; overflow:hidden;
+}
+.contact::before{
+  content:''; position:absolute; bottom:-200px; right:-200px;
+  width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,109,11,0.25), transparent 70%);
+}
+.contact .container{ position:relative; z-index:1; }
+.contact-grid{
+  display:grid; grid-template-columns:1.1fr 1fr; gap:80px; align-items:flex-start;
+}
+.contact h2{ font-size:clamp(40px, 6vw, 80px); margin:14px 0 24px; }
+.contact h2 .accent{ color:var(--orange); }
+.contact-lead{ font-size:18px; color:rgba(255,255,255,0.75); margin-bottom:40px; line-height:1.6; }
+.contact-info{ display:grid; gap:20px; }
+.info-row{
+  display:flex; gap:18px; align-items:center;
+  padding:22px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  transition:all 0.3s;
+}
+.info-row:hover{ border-color:var(--orange); background:rgba(255,109,11,0.08); }
+.info-icon{
+  width:52px; height:52px; border-radius:14px;
+  background:var(--orange); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; flex-shrink:0;
+}
+.info-label{ font-size:12px; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.5); font-weight:700; margin-bottom:4px; }
+.info-val{ font-weight:700; font-size:17px; color:#fff; }
+.info-val a:hover{ color:var(--orange); }
+
+.contact-form{
+  background:#fff; color:var(--black);
+  padding:42px; border-radius:24px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.4);
+}
+.contact-form h3{
+  font-family:'Archivo Black', sans-serif;
+  font-size:26px; text-transform:uppercase;
+  margin-bottom:6px;
+}
+.form-sub{ color:var(--grey); margin-bottom:28px; font-size:14px; }
+.field{ margin-bottom:18px; }
+.field label{ display:block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; color:var(--ink); }
+.field input, .field select, .field textarea{
+  width:100%; padding:14px 16px;
+  border:2px solid #E5E5E5; border-radius:12px;
+  font-family:inherit; font-size:15px;
+  background:#FAFAFA;
+  transition:all 0.3s;
+}
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none; border-color:var(--orange);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,109,11,0.12);
+}
+.field textarea{ min-height:110px; resize:vertical; }
+.form-submit{
+  width:100%; padding:18px;
+  background:var(--orange); color:#fff;
+  border-radius:12px; font-weight:700;
+  font-size:15px; text-transform:uppercase; letter-spacing:0.1em;
+  transition:all 0.3s;
+}
+.form-submit:hover{ background:var(--black); transform:translateY(-2px); }
+
+/* ============== FOOTER ============== */
+footer{
+  background:#050505; color:#fff;
+  padding:60px 32px 30px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.foot-inner{ max-width:var(--max); margin:0 auto; }
+.foot-top{
+  display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;
+  padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.foot-brand p{ color:rgba(255,255,255,0.6); margin-top:16px; font-size:14px; line-height:1.6; }
+.foot-col h5{
+  font-family:'Space Grotesk',sans-serif;
+  text-transform:uppercase; letter-spacing:0.1em;
+  font-size:13px; color:var(--orange);
+  margin-bottom:18px;
+}
+.foot-col ul{ list-style:none; display:grid; gap:10px; }
+.foot-col a{ color:rgba(255,255,255,0.7); font-size:14px; transition:color 0.3s; }
+.foot-col a:hover{ color:var(--orange); }
+.socials{ display:flex; gap:10px; margin-top:8px; }
+.socials a{
+  width:38px; height:38px; border-radius:10px;
+  background:rgba(255,255,255,0.08);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:#fff;
+  transition:all 0.3s;
+}
+.socials a:hover{ background:var(--orange); transform:translateY(-3px); }
+.foot-bot{
+  padding-top:30px;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
+  color:rgba(255,255,255,0.5); font-size:13px;
+}
+
+/* ============== REVEAL ANIMATIONS ============== */
+.reveal{ opacity:0; transform:translateY(30px); transition:opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.8,.2,1); }
+.reveal.in{ opacity:1; transform:translateY(0); }
+.reveal-d2{ transition-delay:0.1s; }
+.reveal-d3{ transition-delay:0.2s; }
+.reveal-d4{ transition-delay:0.3s; }
+
+/* ============== BACK TO TOP ============== */
+.to-top{
+  position:fixed; bottom:30px; right:30px; z-index:99;
+  width:50px; height:50px; border-radius:50%;
+  background:var(--orange); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer;
+  opacity:0; pointer-events:none;
+  transition:all 0.3s;
+  box-shadow:0 8px 24px rgba(255,109,11,0.5);
+}
+.to-top.show{ opacity:1; pointer-events:auto; }
+.to-top:hover{ transform:translateY(-4px); background:#000; }
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 1024px){
+  .hero-inner{ grid-template-columns:1fr; gap:40px; }
+  .hero-stats{ max-width:none; }
+  .service-grid{ grid-template-columns:repeat(2,1fr); }
+  .why-grid, .contact-grid{ grid-template-columns:1fr; gap:50px; }
+  .testi-grid{ grid-template-columns:1fr 1fr; }
+  .counter-grid{ grid-template-columns:repeat(2,1fr); gap:40px; }
+  .foot-top{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 720px){
+  section{ padding:80px 20px; }
+  .nav-inner{ padding:14px 20px; }
+  .nav-links{ display:none; }
+  .nav-links.open{
+    display:flex; position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; background:#000;
+    padding:24px; gap:16px; align-items:flex-start;
+    border-bottom:2px solid var(--orange);
+  }
+  .burger{ display:block; }
+  .hero{ padding:120px 20px 60px; }
+  .hero-ctas{ flex-direction:column; align-items:stretch; }
+  .btn{ justify-content:center; }
+  .service-grid{ grid-template-columns:1fr; }
+  .testi-grid{ grid-template-columns:1fr; }
+  .foot-top{ grid-template-columns:1fr; }
+  .float-badge{ font-size:11px; padding:12px 16px; }
+  .float-badge .big{ font-size:20px; }
+  .contact-form{ padding:28px; }
+  .hero-stats{ grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  .stat .num{ font-size:32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <div class="brand-logo">
+        <img src="https://static.wixstatic.com/media/401011_25e8754c052847e699ca401908251f06~mv2.png/v1/crop/x_43,y_39,w_412,h_421/fill/w_91,h_91,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rapid%20PC%20Repair%20logo.png" alt="Rapid PC Repair Logo">
+      </div>
+      <div class="brand-text">Rapid PC<br><span>Repair Ltd</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+441704778708" class="nav-cta">
+      <span>&#9742;</span> 01704-778708
+    </a>
+    <button class="burger" id="burger" aria-label="menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top">
+  <div class="grid-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-tag reveal"><span class="dot"></span> Southport's #1 Repair Shop · Since 2000</span>
+      <h1 class="display reveal reveal-d2">
+        Broken<br>
+        <span class="accent">Tech?</span><br>
+        <span class="stroke">We Fix It</span><br>
+        Fast.
+      </h1>
+      <p class="hero-sub reveal reveal-d3">
+        Macs, PCs, laptops, gaming rigs and consoles — repaired, upgraded and refurbished by Southport's most trusted workshop. Diagnosis in minutes, repair done right.
+      </p>
+      <div class="hero-ctas reveal reveal-d4">
+        <a href="tel:+441704778708" class="btn btn-primary">
+          Get Help Now <span class="arrow">&#8594;</span>
+        </a>
+        <a href="#services" class="btn btn-ghost">
+          Our Services <span class="arrow">&#8595;</span>
+        </a>
+      </div>
+      <div class="hero-stats reveal reveal-d4">
+        <div class="stat"><span class="num" data-count="25">0</span><span class="lbl">Years Trusted</span></div>
+        <div class="stat"><span class="num" data-count="15000" data-suffix="+">0</span><span class="lbl">Devices Fixed</span></div>
+        <div class="stat"><span class="num" data-count="5" data-suffix="★">0</span><span class="lbl">Google Rated</span></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-d3">
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=900&q=80&auto=format&fit=crop" alt="Computer repair workshop">
+      </div>
+      <div class="float-badge badge-1">
+        <span class="big">&#9889;</span>
+        <div>Rapid<br>Diagnosis</div>
+      </div>
+      <div class="float-badge badge-2">
+        <span class="big">20+</span>
+        <div>Years of<br>Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== MARQUEE ============== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Mac Repair <span class="dot-sep"></span> PC Repair <span class="dot-sep"></span> Laptops <span class="dot-sep"></span> Gaming Builds <span class="dot-sep"></span> PlayStation <span class="dot-sep"></span> Xbox <span class="dot-sep"></span> Refurbished <span class="dot-sep"></span> Data Recovery <span class="dot-sep"></span> Screen Repair <span class="dot-sep"></span></span>
+    <span>Mac Repair <span class="dot-sep"></span> PC Repair <span class="dot-sep"></span> Laptops <span class="dot-sep"></span> Gaming Builds <span class="dot-sep"></span> PlayStation <span class="dot-sep"></span> Xbox <span class="dot-sep"></span> Refurbished <span class="dot-sep"></span> Data Recovery <span class="dot-sep"></span> Screen Repair <span class="dot-sep"></span></span>
+  </div>
+</div>
+
+<!-- ============== SERVICES ============== -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">What We Do</span>
+      <h2 class="display">Repairs, Upgrades<br>& Custom Builds</h2>
+      <p>From cracked screens to full gaming rigs — one workshop, every device, fair prices.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service reveal">
+        <div class="service-content">
+          <div class="service-icon">&#63743;</div>
+          <h3>Mac &amp; iMac Repairs</h3>
+          <p>Logic board fixes, screen replacements, SSD upgrades and macOS rescues for every Apple device.</p>
+          <div class="service-tags">
+            <span class="tag">MacBook</span><span class="tag">iMac</span><span class="tag">Mac Mini</span>
+          </div>
+          <span class="service-arrow">&#8594;</span>
+        </div>
+      </div>
+      <div class="service reveal reveal-d2">
+        <div class="service-content">
+          <div class="service-icon">&#128187;</div>
+          <h3>PC &amp; Laptop Repairs</h3>
+          <p>Windows recoveries, motherboard repairs, virus removal and hardware upgrades — all brands, all problems.</p>
+          <div class="service-tags">
+            <span class="tag">Windows</span><span class="tag">Hardware</span><span class="tag">Virus Removal</span>
+          </div>
+          <span class="service-arrow">&#8594;</span>
+        </div>
+      </div>
+      <div class="service reveal reveal-d3">
+        <div class="service-content">
+          <div class="service-icon">&#127918;</div>
+          <h3>Custom Gaming PCs</h3>
+          <p>Built to spec — RGB rigs, streaming setups and office workhorses. Pick your performance, we build it.</p>
+          <div class="service-tags">
+            <span class="tag">Custom Build</span><span class="tag">Upgrades</span><span class="tag">RGB</span>
+          </div>
+          <span class="service-arrow">&#8594;</span>
+        </div>
+      </div>
+      <div class="service reveal">
+        <div class="service-content">
+          <div class="service-icon">&#128241;</div>
+          <h3>Tablets &amp; iPads</h3>
+          <p>Screen repairs, battery swaps and software fixes for iPads, Android tablets and Surface devices.</p>
+          <div class="service-tags">
+            <span class="tag">iPad</span><span class="tag">Android</span><span class="tag">Surface</span>
+          </div>
+          <span class="service-arrow">&#8594;</span>
+        </div>
+      </div>
+      <div class="service reveal reveal-d2">
+        <div class="service-content">
+          <div class="service-icon">&#127911;</div>
+          <h3>Console Repair</h3>
+          <p>Xbox and PlayStation diagnostics, HDMI port repairs, disc drive fixes and overheating solutions.</p>
+          <div class="service-tags">
+            <span class="tag">PlayStation</span><span class="tag">Xbox</span><span class="tag">Switch</span>
+          </div>
+          <span class="service-arrow">&#8594;</span>
+        </div>
+      </div>
+      <div class="service reveal reveal-d3">
+        <div class="service-content">
+          <div class="service-icon">&#9851;</div>
+          <h3>Refurbished &amp; Shop</h3>
+          <p>Quality refurbished Macs, laptops and accessories — fully tested, fairly priced, ready to go.</p>
+          <div class="service-tags">
+            <span class="tag">Macs</span><span class="tag">Laptops</span><span class="tag">Accessories</span>
+          </div>
+          <span class="service-arrow">&#8594;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== WHY US ============== -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-text">
+        <span class="eyebrow reveal">Why Rapid PC</span>
+        <h2 class="display reveal reveal-d2">Trusted by<br>Southport<br>For <span class="accent">25 Years.</span></h2>
+        <p class="reveal reveal-d3">We're not a chain. We're the workshop your neighbours, your kids' school and the local businesses keep coming back to. Honest pricing, fast turnarounds and proper diagnostics — that's the deal.</p>
+        <div class="why-points">
+          <div class="point reveal">
+            <div class="point-num">01</div>
+            <div><h4>Rapid Diagnostics</h4><p>Leading-edge workshop tech identifies your fault in minutes, not days.</p></div>
+          </div>
+          <div class="point reveal reveal-d2">
+            <div class="point-num">02</div>
+            <div><h4>Fair, Up-Front Pricing</h4><p>No surprises. We quote before we start, and stand by the figure.</p></div>
+          </div>
+          <div class="point reveal reveal-d3">
+            <div class="point-num">03</div>
+            <div><h4>Every Device, One Roof</h4><p>From iPads to gaming rigs to consoles — if it has a chip, we'll fix it.</p></div>
+          </div>
+          <div class="point reveal reveal-d4">
+            <div class="point-num">04</div>
+            <div><h4>Local &amp; Family-Run</h4><p>Trading on Manchester Road, Southport, since 2000. We treat customers like family.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual reveal reveal-d3">
+        <div class="why-photo why-1">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&q=80&auto=format&fit=crop" alt="Circuit board repair">
+        </div>
+        <div class="why-photo why-2">
+          <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?w=700&q=80&auto=format&fit=crop" alt="Technician at work">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COUNTERS ============== -->
+<section class="counters">
+  <div class="counter-grid">
+    <div class="counter"><span class="n" data-count="25" data-suffix="+">0</span><span class="l">Years in Business</span></div>
+    <div class="counter"><span class="n" data-count="15000" data-suffix="+">0</span><span class="l">Devices Repaired</span></div>
+    <div class="counter"><span class="n" data-count="48" data-suffix="hr">0</span><span class="l">Average Turnaround</span></div>
+    <div class="counter"><span class="n" data-count="99" data-suffix="%">0</span><span class="l">Customer Satisfaction</span></div>
+  </div>
+</section>
+
+<!-- ============== TESTIMONIALS ============== -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Customer Reviews</span>
+      <h2 class="display">What Southport<br>Is Saying</h2>
+      <p>Two decades of word-of-mouth from people who came in with a problem and left happy.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Took my MacBook in thinking it was dead. Robert had it back to me the next day for half what Apple quoted. Absolute lifesavers.</p>
+        <div class="testi-author">
+          <div class="avatar">SC</div>
+          <div><div class="testi-name">Sarah C.</div><div class="testi-role">Southport, MacBook repair</div></div>
+        </div>
+      </div>
+      <div class="testi reveal reveal-d2">
+        <span class="quote-mark">&ldquo;</span>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Built me a custom gaming PC and the thing is a beast. Friendly, knowledgeable and didn't push specs I didn't need. Top job.</p>
+        <div class="testi-author">
+          <div class="avatar">JM</div>
+          <div><div class="testi-name">James M.</div><div class="testi-role">Birkdale, Gaming PC build</div></div>
+        </div>
+      </div>
+      <div class="testi reveal reveal-d3">
+        <span class="quote-mark">&ldquo;</span>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>My PS5 stopped reading discs. Fixed within 48 hours, fair price. Will absolutely recommend to friends and family.</p>
+        <div class="testi-author">
+          <div class="avatar">DH</div>
+          <div><div class="testi-name">Dan H.</div><div class="testi-role">Ainsdale, PS5 repair</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT ============== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <span class="eyebrow reveal">Get In Touch</span>
+        <h2 class="display reveal reveal-d2">Got A Broken<br>Device? <span class="accent">Talk To Us.</span></h2>
+        <p class="contact-lead reveal reveal-d3">Pop in, call us, or send a quick message and we'll get back to you the same working day. No appointments needed for diagnostics.</p>
+        <div class="contact-info">
+          <div class="info-row reveal">
+            <div class="info-icon">&#9742;</div>
+            <div><div class="info-label">Call us</div><div class="info-val"><a href="tel:+441704778708">01704-778708</a></div></div>
+          </div>
+          <div class="info-row reveal reveal-d2">
+            <div class="info-icon">&#9993;</div>
+            <div><div class="info-label">Email</div><div class="info-val"><a href="mailto:customerservice@rapid-pc-repair.co.uk">customerservice@rapid-pc-repair.co.uk</a></div></div>
+          </div>
+          <div class="info-row reveal reveal-d3">
+            <div class="info-icon">&#9873;</div>
+            <div><div class="info-label">Workshop</div><div class="info-val"><a href="https://g.page/rapidpcrepairsouthport" target="_blank" rel="noopener">129 Manchester Rd, Southport PR9 9BD</a></div></div>
+          </div>
+          <div class="info-row reveal reveal-d4">
+            <div class="info-icon">&#9201;</div>
+            <div><div class="info-label">Hours</div><div class="info-val">Mon – Fri · 10am to 6pm</div></div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form reveal reveal-d3" id="contactForm" onsubmit="handleSubmit(event)">
+        <h3>Quick Quote</h3>
+        <p class="form-sub">Tell us what's up and we'll be in touch.</p>
+        <div class="field"><label for="name">Your Name</label><input type="text" id="name" required></div>
+        <div class="field"><label for="contact-info">Phone or Email</label><input type="text" id="contact-info" required></div>
+        <div class="field">
+          <label for="device">Device</label>
+          <select id="device" required>
+            <option value="">Select a device…</option>
+            <option>MacBook / iMac</option>
+            <option>Windows PC / Laptop</option>
+            <option>Tablet / iPad</option>
+            <option>PlayStation / Xbox</option>
+            <option>Custom Gaming Build</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field"><label for="issue">What's the problem?</label><textarea id="issue" placeholder="e.g. screen cracked, won't turn on, running slow…" required></textarea></div>
+        <button type="submit" class="form-submit" id="submitBtn">Send Enquiry &#8594;</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="brand-logo">
+            <img src="https://static.wixstatic.com/media/401011_25e8754c052847e699ca401908251f06~mv2.png/v1/crop/x_43,y_39,w_412,h_421/fill/w_91,h_91,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rapid%20PC%20Repair%20logo.png" alt="Rapid PC Repair">
+          </div>
+          <div class="brand-text">Rapid PC<br><span>Repair Ltd</span></div>
+        </div>
+        <p>Southport's most trusted computer servicing shop. Repairs, upgrades and custom builds since 2000.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/rapidpcsouthport/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/rapidpcrepair/" target="_blank" rel="noopener" aria-label="Instagram">&#9737;</a>
+          <a href="https://www.youtube.com/channel/UCGrZWixQMf3BychlfpHOCtA" target="_blank" rel="noopener" aria-label="YouTube">&#9655;</a>
+          <a href="https://g.page/rapidpcrepairsouthport" target="_blank" rel="noopener" aria-label="Google">G</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Mac Repairs</a></li>
+          <li><a href="#services">PC &amp; Laptop Repairs</a></li>
+          <li><a href="#services">Gaming PCs</a></li>
+          <li><a href="#services">Console Repair</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#why">About Us</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://www.rapid-pc-repair.co.uk/category/all-products" target="_blank" rel="noopener">Online Shop</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Visit Us</h5>
+        <ul>
+          <li>129 Manchester Rd</li>
+          <li>Southport PR9 9BD</li>
+          <li><a href="tel:+441704778708">01704-778708</a></li>
+          <li>Mon–Fri · 10am–6pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>&copy; 2026 Rapid PC Repair Ltd · Company Reg: 10574354</div>
+      <div>Built with care · All trademarks property of their owners</div>
+    </div>
+  </div>
+</footer>
+
+<a href="#top" class="to-top" id="toTop" aria-label="back to top">&#8593;</a>
+
+<script>
+// ============== SCROLL REVEAL ==============
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ============== ANIMATED COUNTERS ==============
+const countObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el = e.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now - start)/duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = Math.floor(target * eased);
+        el.textContent = (val >= 1000 ? val.toLocaleString() : val) + suffix;
+        if(p < 1) requestAnimationFrame(tick);
+        else el.textContent = (target >= 1000 ? target.toLocaleString() : target) + suffix;
+      }
+      requestAnimationFrame(tick);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('[data-count]').forEach(el=>countObserver.observe(el));
+
+// ============== NAV HIDE ON SCROLL DOWN ==============
+let lastY = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', ()=>{
+  const y = window.scrollY;
+  if(y > 200 && y > lastY) nav.style.transform = 'translateY(-100%)';
+  else nav.style.transform = 'translateY(0)';
+  lastY = y;
+  document.getElementById('toTop').classList.toggle('show', y > 600);
+});
+
+// ============== MOBILE MENU ==============
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navLinks.classList.remove('open')));
+
+// ============== FORM ==============
+function handleSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending…';
+  btn.style.background = '#000';
+  setTimeout(()=>{
+    btn.textContent = '✓ Thanks — we\'ll be in touch!';
+    btn.style.background = '#1a8f3c';
+    document.getElementById('contactForm').reset();
+    setTimeout(()=>{ btn.textContent = 'Send Enquiry →'; btn.style.background = ''; }, 3500);
+  }, 800);
+}
+</script>
+</body>
+</html>
